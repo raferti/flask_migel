@@ -7,7 +7,27 @@
       {% endif %}
     </head>
     <body>
-        <div>Microblog: <a href="/index">Home</a></div>
+        <div>Microblog: <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('login') }}">Login</a>
+        </div>
+        <!--Конструкция with, чтобы назначить результат-->
+        <!--вызова get_flashed_messages()-->
+
+        <!--get_flashed_messages() поступает из Flask и возвращает список всех-->
+        <!--сообщений, которые были зарегистрированы в flash() ранее.-->
+
+        <!--Условие, которое следует, проверять имеет ли сообщение -->
+        <!--контент, и только в этом случае делать его ввыод -->
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
         <hr>
             {% block content %}
 
